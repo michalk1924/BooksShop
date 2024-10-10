@@ -52,18 +52,42 @@ const prevPage = () => {
 }
 
 const nextPage = () => {
-    debugger
     currentPage++;
     if (currentPage > Math.ceil(books.length / booksPerPage) - 1)
         currentPage = Math.ceil(books.length / booksPerPage) - 1;
     displayBooks();
 }
 
-const main = () => {
+const changeLanguage = () => {
+    const selectedLanguage = document.getElementById('languageSelect').value;
+    language = selectedLanguage;
+    pushTextLanguage();
+}
+
+const main = async () => {
     let bookIdLoad = loadFromStorage(bookId);
     if (bookIdLoad) bookId = bookIdLoad;
     else saveToStorage('bookId', 1);
     loadPage();
+    pushTextLanguage();
+}
+
+const sortOptions = {
+    'title-up': (a, b) => (a.title > b.title) ? 1 : -1,
+    'title-down': (a, b) => (a.title < b.title) ? 1 : -1,
+    'price-up': (a, b) => a.price - b.price,
+    'price-down': (a, b) => b.price - a.price,
+    'rate-up': (a, b) => a.rate - b.rate,
+    'rate-down': (a, b) => b.rate - a.rate,
+}
+
+const sort = (type) => {
+debugger
+    console.log(type);
+    books.sort(sortOptions[type]);
+    console.log(books);
+    currentPage = 0;
+    displayBooks();
 }
 
 main(); 
