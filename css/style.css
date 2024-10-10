@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.hide{
+    display: none;
+}

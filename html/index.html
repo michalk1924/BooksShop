@@ -1,28 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookshop ERP</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/smallCard.css">
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <h1>Bookshop ERP</h1>
-    <div>
-        <div>New book</div>
-        <div>
-            <h3>Load Data</h3>
+    <div class="actionLine">
+        <h3 onclick="showAddBook()">New book</h3>
+        <div class="rightAction">
+            <h3 onclick="loadData()">Load Data</h3>
             <input type="url">
         </div>
     </div>
-    <div>
-        <div class="thTable"></div>
-        <div class="booksTable"></div>
-    </div>
+
+    <main>
+
+        <div class="booksTable">
+            <div class="thTable">
+                <h2>id</h2>
+                <h2>title</h2>
+                <h2>price</h2>
+                <h2>update</h2>
+                <h2>delete</h2>
+                <h2></h2>
+            </div>
+            <div class="booksLines"></div>
+            <div class="nav">
+                <button onclick="prevPage()"><i class="fa-solid fa-left-long"></i></button>
+                <button onclick="nextPage()"><i class="fa-solid fa-right-long"></i></button>
+            </div>
+
+        </div>
+
+        <div class="smallCard">
+
+            <div class="updateBook hide">
+                <form action="add-update-book" onsubmit="addBook(event)">
+                    <h2 class="title"></h2>
+                    <label for="title">title</label>
+                    <input type="text" name="title" />
+                    <label for="price">price</label>
+                    <input type="number" name="price" />
+                    <label for="rate">Rate</label>
+                    <div class="rate-control">
+                        <button type="button" class="rate-button" onclick="changeRate(-1)">−</button>
+                        <input type="number" name="rate" value="0" min="0" readonly />
+                        <button type="button" class="rate-button" onclick="changeRate(1)">+</button>
+                    </div>
+                    <button type="submit" class="submit-button">submit</button>
+                </form>
+            </div>
+
+            <div class="addBook hide">
+                <form action="add-book" onsubmit="addBook(event)">
+                    <h2 class="title"></h2>
+                    <label for="title">title</label>
+                    <input type="text" name="title" />
+                    <label for="price">price</label>
+                    <input type="number" name="price" />
+                    <label for="image">image src</label>
+                    <input type="text" name="image">
+                    <button type="submit" class="submit-button">submit</button>
+                </form>
+            </div>
+
+            <div class="showBook hide">
+            </div>
+
+        </div>
+
+    </main>
 
     <script src="../js/books.js"></script>
     <script src="../js/model.js"></script>
     <script src="../js/view.js"></script>
     <script src="../js/controller.js"></script>
-    
 </body>
+
 </html>

@@ -1,0 +1,64 @@
+.booksTable {
+    width: 75%;
+    border: 1px solid rgb(163, 202, 163);
+}
+
+.thTable {
+    width: 100%;
+    height: 13vh;
+    display: grid;
+    grid-template-columns: 10% 36% 20% 17% 17%;
+    border: 1px solid rgb(32, 35, 32);
+    background-color: rgb(129, 220, 129);;
+    text-align: center;
+}
+
+.booksLines {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.bookLine {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 36% 20% 17% 17%;
+    border: 1px solid rgb(76, 103, 76);
+    text-align: center;
+}
+
+.bookLine button {
+    margin: 0.5rem;
+    border: rgb(24, 47, 24) 1px solid;
+    border-radius: 5px;
+    background-color: rgb(185, 205, 185);
+}
+
+.actionLine{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid rgb(24, 32, 24);
+    text-align: center;
+    background-color: rgb(24, 46, 32);
+    color: white;
+}
+
+.actionLine .rightAction{
+   display: flex;
+   flex-direction: row;
+   margin-left: 1rem;
+}
+
+.nav button{
+ background-color: rgb(100, 139, 100);
+ border-radius: 5px;
+ border: rgb(24, 47, 24) 1px solid;
+}
+
+.hide{
+    display: none;
+}
