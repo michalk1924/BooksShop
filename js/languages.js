@@ -101,7 +101,7 @@ const languages = {
     },
     updateBookTitle: {
         english: 'Update Book',
-        hebrew: 'עדכו�� ��פר',
+        hebrew: 'עדכון ספר',
         french: 'Modifier un livre',
         spanish: 'Actualizar libro',
         italian: 'Aggiorna libro',

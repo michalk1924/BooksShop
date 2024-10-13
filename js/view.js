@@ -50,7 +50,8 @@ const showAddBook = () => {
 }
 
 const showBookDetails = (id) => {
-    const selectedBook = getBook(id);
+    const selectedBook = getBookById(id);
+    console.log(selectedBook);
     if (!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
     if (!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
     showBook.classList.remove('hide');
@@ -67,10 +68,10 @@ const showBookDetails = (id) => {
 }
 
 const showUpdateBook = (id) => {
-    const selectedBook = getBook(id);
+    const selectedBook = getBookById(id);
     if (!selectedBook) return;
     if (!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
-    if (!showBook.classList.contains('hide')) addBookForm.classList.add('hide');
+    if (!showBook.classList.contains('hide')) showBook.classList.add('hide');
     updateBookForm.classList.remove('hide');
     updateBookForm.innerHTML = `
     <form action="add-update-book" onsubmit="updateBook(event, ${id})">
@@ -95,7 +96,6 @@ const updateRateDisplay = (rate) => {
 }
 
 const closeElement = (element) => {
-    debugger
     element.classList.add('hide');
 }
 
@@ -161,8 +161,15 @@ const nextPage = () => {
 }
 
 const changePage = (pageNumber) => {
-    document.querySelector(`#pageButton${currentPage+1}`).classList.remove('active');
+    document.querySelector(`#pageButton${currentPage+1}`)?.classList.remove('active');
     currentPage = pageNumber;
-    document.querySelector(`#pageButton${pageNumber+1}`).classList.add('active');
+    document.querySelector(`#pageButton${pageNumber+1}`)?.classList.add('active');
     displayBooks();
+}
+
+const changeLanguage = () => {
+    const selectedLanguage = document.getElementById('languageSelect').value;
+    language = selectedLanguage;
+    document.getElementsByTagName('body')[0].style.direction = language === 'english'? 'ltr' : 'rtl';
+    pushTextLanguage();
 }

@@ -19,12 +19,12 @@ const updateBooksArray = (booksParam) => {
     books = booksParam;
 }
 
-const saveBook = (title, price, imageSrc) => {
+const saveBookById = (title, price, imageSrc) => {
     const booksLoad = loadFromStorage('books');
     if (booksLoad) {
         books = booksLoad;
         bookId = bookId + 1;
-        books.push({ id: bookId, title: title, price: parseInt(price), image: imageSrc });
+        books.push({ id: bookId, title: title, price: parseInt(price), image: imageSrc, rate: 0 });
         saveToStorage('books', books);
         renderBooks();
     }

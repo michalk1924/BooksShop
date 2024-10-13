@@ -1,3 +1,4 @@
+
 const loadPage = () => {
     const savedBooks = loadFromStorage('books');
     if (!savedBooks) {
@@ -22,6 +23,7 @@ const deleteBook = (id) => {
     }
     if(books.length % booksPerPage === 0) {
         deletePageInPagingLine(books.length / booksPerPage + 1);
+        if(currentPage >= books.length / booksPerPage - 1) changePage(currentPage-1);
     }
 }
 
@@ -39,7 +41,7 @@ const addBook = (event) => {
 const updateBook = (event, id) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const selectedBook = getBook(id);
+    const selectedBook = getBookById(id);
     if (selectedBook) {
         selectedBook.title = formData.get('title');
         selectedBook.price = formData.get('price');
@@ -54,7 +56,7 @@ const updateBook = (event, id) => {
 }
 
 const changeRate = (id, rateChange) => {
-    const selectedBook = getBook(parseInt(id));
+    const selectedBook = getBookById(parseInt(id));
     selectedBook.rate += parseInt(rateChange);
     books = books.filter(book => book.id !== id);
     books.push(selectedBook);
@@ -69,12 +71,6 @@ const loadData = () => {
     updateBooksArray(Gbooks);
     displayBooks();
     createPagingLine();
-}
-
-const changeLanguage = () => {
-    const selectedLanguage = document.getElementById('languageSelect').value;
-    language = selectedLanguage;
-    pushTextLanguage();
 }
 
 const sortOptions = {
