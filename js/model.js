@@ -3,7 +3,8 @@ var books = [];
 let currentPage = 0;
 const booksPerPage = 10;
 var bookId = 20;
-let language = 'english'
+let language = 'english';
+let sortType = 'id';
 
 const saveToStorage = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));

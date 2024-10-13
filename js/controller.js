@@ -23,19 +23,40 @@ const renderBooks = () => {
 }
 
 const addBook = (event) => {
+    event.preventDefault();
     const formData = new FormData(event.target);
     saveBook(formData.get('title'), formData.get('price'), formData.get('image'));
-    formData.reset();
+    event.target.reset();
     addBookForm.classList.add('hide');
 }
+
 
 const changeRate = (id, rateChange) => {
     const selectedBook = getBook(parseInt(id));
     selectedBook.rate += parseInt(rateChange);
     books = books.filter(book => book.id !== id);
     books.push(selectedBook);
+    sort(sortType);
     renderBooks(books);
     updateRateDisplay(selectedBook.rate);
+}
+
+const updateBook = (event, id) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const selectedBook = getBook(id);
+    debugger
+    if (selectedBook) {
+        selectedBook.title = formData.get('title');
+        selectedBook.price = formData.get('price');
+        selectedBook.image = formData.get('image');
+        selectedBook.rate = parseInt(formData.get('rate'));
+        books = books.filter(book => book.id !== id);
+        books.push(selectedBook);
+        sort(sortType);
+        renderBooks();
+    }
+    updateBookForm.innerHTML = '';
 }
 
 const loadData = () => {
@@ -64,17 +85,10 @@ const changeLanguage = () => {
     pushTextLanguage();
 }
 
-const main = async () => {
-    let bookIdLoad = loadFromStorage(bookId);
-    if (bookIdLoad) bookId = bookIdLoad;
-    else saveToStorage('bookId', 1);
-    loadPage();
-    pushTextLanguage();
-}
-
 const sortOptions = {
-    'title-up': (a, b) => (a.title > b.title) ? 1 : -1,
-    'title-down': (a, b) => (a.title < b.title) ? 1 : -1,
+    'id': (a, b) => a.id - b.id,
+    'title-up': (a, b) => (a.title.toUpperCase() > b.title.toUpperCase()) ? 1 : -1,
+    'title-down': (a, b) => (a.title.toUpperCase() < b.title.toUpperCase()) ? 1 : -1,
     'price-up': (a, b) => a.price - b.price,
     'price-down': (a, b) => b.price - a.price,
     'rate-up': (a, b) => a.rate - b.rate,
@@ -82,12 +96,20 @@ const sortOptions = {
 }
 
 const sort = (type) => {
-debugger
-    console.log(type);
     books.sort(sortOptions[type]);
-    console.log(books);
+    sortType = type;
+    changeSortIcon(type);
     currentPage = 0;
     displayBooks();
+}
+
+const main = async () => {
+    let bookIdLoad = loadFromStorage(bookId);
+    if (bookIdLoad) bookId = bookIdLoad;
+    else saveToStorage('bookId', 1);
+    sort('id');
+    loadPage();
+    pushTextLanguage();
 }
 
 main(); 

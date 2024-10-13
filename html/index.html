@@ -36,11 +36,20 @@
         <div class="booksTable">
             <div class="thTable">
                 <h3 class="th-id"></h3>
-                <div  class="th-title-sort">
-                    <h3 class="th-title"></h3>
-                    <i class="fa-solid fa-up-long" onclick="sort('title-up')"></i>
+                <div class="th-sort">
+                    <h3 class="th-sort" id="th-title"></h3>
+                    <div class="sort">
+                        <i class="fa-solid fa-up-long" id="title-up" onclick="sort('title-up')"></i>
+                        <i class="hidden fa-solid fa-down-long" id="title-down" onclick="sort('title-down')"></i>
+                    </div>
                 </div>
-                <h3 class="th-price"></h3>
+                <div class="th-sort">
+                    <h3 class="th-price" id="th-price"></h3>
+                    <div class="sort">
+                        <i class="fa-solid fa-up-long" id="price-up" onclick="sort('price-up')"></i>
+                        <i class="hidden fa-solid fa-down-long" id="price-down" onclick="sort('price-down')"></i>
+                    </div>
+                </div>
                 <h3 class="th-delete"></h3>
                 <h3 class="th-update"></h3>
             </div>
@@ -55,7 +64,6 @@
         <div class="rightCard">
 
             <div class="updateBook hide">
-
             </div>
 
             <div class="addBook hide">

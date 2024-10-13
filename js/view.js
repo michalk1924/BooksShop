@@ -2,12 +2,17 @@
 const booksDiv = document.querySelector('.booksLines');
 const addBookForm = document.querySelector('.addBook');
 const showBook = document.querySelector('.showBook');
+const updateBookForm = document.querySelector('.updateBook');
+const titleDown = document.querySelector('#title-down');
+const titleUp = document.querySelector('#title-up');
+const priceUp = document.querySelector('#price-up');
+const priceDown = document.querySelector('#price-down');
 
 const texts = {
     title: document.querySelector('.title'),
     thId: document.querySelector('.th-id'),
-    thTitle: document.querySelector('.th-title'),
-    thPrice: document.querySelector('.th-price'),
+    thTitle: document.querySelector('#th-title'),
+    thPrice: document.querySelector('#th-price'),
     thDelete: document.querySelector('.th-delete'),
     thUpdate: document.querySelector('.th-update'),
     newBook: document.querySelector('.newBook'),
@@ -16,9 +21,8 @@ const texts = {
 
 const displayBooks = () => {
     let i = currentPage;
-    sortBooks = books.sort((a, b) => a.id - b.id);
     const booksPerPage = 10;
-    let displayBooks = sortBooks.slice(i * booksPerPage, i * booksPerPage + booksPerPage);
+    let displayBooks = books.slice(i * booksPerPage, i * booksPerPage + booksPerPage);
     booksDiv.innerHTML = '';
     displayBooks.forEach(book => {
         const bookDiv = getBookDivInTable(book);
@@ -34,21 +38,23 @@ const getBookDivInTable = (book) => {
         <h3 class="title" onclick="showBookDetails(${book.id})">${book.title}</h3>
         <h3 class="price">${book.price}$</h3>
         <button class="deleteBtn" onclick="deleteBook(${book.id})">🗑️</button>
-        <button class="updateBtn" onclick="updateBook(${book.id})">✏️</button>`;
+        <button class="updateBtn" onclick="showUpdateBook(${book.id})">✏️</button>`;
     return bookDiv;
 }
 
 const showAddBook = () => {
     addBookForm.classList.remove('hide');
     if (!showBook.classList.contains('hide')) showBook.classList.add('hide');
+    if(!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
 }
 
 const showBookDetails = (id) => {
     const selectedBook = getBook(id);
-    if (!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
+    if(!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
+    if(!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
     showBook.classList.remove('hide');
     showBook.innerHTML = `
-    <button onclick="closeBookDetails()">❌</button>
+    <button onclick="closeElement(${showBook})">❌</button>
     <h2>${selectedBook.title}</h2>
     <h3>Price: ${selectedBook.price}$</h3>
     <div class="rate-control">
@@ -61,19 +67,22 @@ const showBookDetails = (id) => {
 
 const showUpdateBook = (id) => {
     const selectedBook = getBook(id);
-    addBookForm.classList.remove('hide');
-    showBook.classList.add('hide');
-    addBookForm.innerHTML = `
-    <form action="add-update-book" onsubmit="addBook(event)">
-                    <h2 class="title">${updateBook[la]}</h2>
-                    <label for="title">${selectedBook.title}</label>
-                    <input type="text" name="title" />
+    if (!selectedBook) return;
+    if (!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
+    if (!showBook.classList.contains('hide')) addBookForm.classList.add('hide');
+    updateBookForm.classList.remove('hide');
+    updateBookForm.innerHTML = `
+    <form action="add-update-book" onsubmit="updateBook(event, ${id})">
+        <button onclick="closeElement(${updateBookForm})">❌</button>
+                    <h2 class="title">${languages.updateBookTitle[language]}</h2>
+                    <label for="title">title</label>
+                    <input type="text" name="title" value=${selectedBook.title} />
                     <label for="price">price</label>
-                    <input type="number" name="price" />
+                    <input type="number" name="price" value=${selectedBook.price} />
                     <label for="rate">Rate</label>
                     <div class="rate-control">
                         <button type="button" class="rate-button" onclick="changeRate(-1)">−</button>
-                        <input type="number" name="rate" value="0" min="0" readonly />
+                        <input type="number" name="rate" value=${selectedBook.rate} min="0" readonly />
                         <button type="button" class="rate-button" onclick="changeRate(1)">+</button>
                     </div>
                     <button type="submit" class="submit-button">submit</button>
@@ -84,14 +93,35 @@ const updateRateDisplay = (rate) => {
     document.querySelector('#rate').value = rate;
 }
 
-const closeBookDetails = () => {
-    showBook.classList.add('hide');
+const closeElement = (element) => {
+    element.classList.add('hide');
 }
 
-const pushTextLanguage = () => {    
+const changeSortIcon = (sortIcon) => {
+    switch (sortIcon) {
+        case 'title-up':
+            titleDown.classList.remove('hidden');
+            titleUp.classList.add('hidden');
+            break;
+        case 'title-down':
+            titleUp.classList.remove('hidden');
+            titleDown.classList.add('hidden');
+            break;
+        case 'price-up':
+            priceDown.classList.remove('hidden');
+            priceUp.classList.add('hidden');
+            break;
+        case 'price-down':
+            priceUp.classList.remove('hidden');
+            priceDown.classList.add('hidden');
+            break;
+    }
+}
+
+const pushTextLanguage = () => {
     for (let key in texts) {
-        if(texts[key]){
-        texts[key].innerHTML = languages[key][language];
+        if (texts[key]) {
+            texts[key].innerHTML = languages[key][language];
         }
     }
 }

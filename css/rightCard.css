@@ -1,34 +1,16 @@
-.rightCard{
-    width:27%;
+.rightCard {
+    width: 27%;
 }
 
 .rate button {
-    width:20%;
+    width: 20%;
 }
 
-.rate input[type="number"]{
-    width:60%;
+.rate input[type="number"] {
+    width: 60%;
 }
 
-.updateBook, .addBook, .showBook {
-    padding: 2rem;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgb(211, 222, 211);
-    border: 2px solid rgb(76, 103, 76);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.showBook{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.rate-control{
+.rate-control {
     margin: 1rem;
     width: 100%;
     height: 5vh;
@@ -38,8 +20,8 @@
     justify-content: space-between;
 }
 
-.rate-control input[type="number"]{
-    width:20%;
+.rate-control input[type="number"] {
+    width: 20%;
     padding: 0.5rem;
     border: 1px solid rgb(76, 103, 76);
     border-radius: 4px;
@@ -47,7 +29,7 @@
 }
 
 .rate-button {
-    width:20%;
+    width: 20%;
     background-color: rgb(24, 46, 32);
     color: white;
     border: none;
@@ -61,46 +43,33 @@
     background-color: rgb(76, 103, 76);
 }
 
-.updateBook, .addBook, .showBook h2 {
-    color: rgb(24, 32, 24);
+.updateBook form,
+.addBook form,
+.showBook {
+    padding: 2rem;
+    margin: 0;
+    height: 130vh;
+    width: 100%;
+    background-color: rgb(181, 216, 181);
+    border: 2px solid rgb(76, 103, 76);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-.updateBook, .addBook label {
-    display: block;
-    margin: 1rem 0 0.5rem;
-    color: rgb(24, 32, 24);
-}
-
-.updateBook, .addBook input[type="text"],
-.updateBook, .addBook input[type="number"] {
-    width: 100%;
+.showBook,
+.addBook,
+.updateBook input[type="submit"] {
+    /* margin-top: 1rem; */
     padding: 0.5rem;
-    border: 1px solid rgb(76, 103, 76);
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.updateBook, .addBook input[type="text"]:focus,
-.updateBook, .addBook input[type="number"]:focus {
-    border-color: rgb(24, 46, 32);
-    outline: none;
-}
-
-.updateBook, .addBook input[type="submit"] {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background-color: rgb(24, 46, 32);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.updateBook, .addBook input[type="submit"]:hover {
-    background-color: rgb(76, 103, 76);
-}
-
-.hide{
+.hide {
     display: none;
 }

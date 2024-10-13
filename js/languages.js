@@ -99,4 +99,13 @@ const languages = {
         german: 'Daten laden',
         russian: 'Загрузить данные',
     },
+    updateBookTitle: {
+        english: 'Update Book',
+        hebrew: 'עדכו�� ��פר',
+        french: 'Modifier un livre',
+        spanish: 'Actualizar libro',
+        italian: 'Aggiorna libro',
+        german: 'Buch aktualisieren',
+        russian: 'Обновить книгу',
+    }
 }
