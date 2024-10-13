@@ -9,17 +9,20 @@ const loadPage = () => {
     displayBooks();
 }
 
+const renderBooks = () => {
+    saveToStorage('books', books);
+    displayBooks();
+}
+
 const deleteBook = (id) => {
     const bookIndex = books.findIndex(book => book.id === id);
     if (bookIndex !== -1) {
         books.splice(bookIndex, 1);
         renderBooks();
     }
-}
-
-const renderBooks = () => {
-    saveToStorage('books', books);
-    displayBooks();
+    if(books.length % booksPerPage === 0) {
+        deletePageInPagingLine(books.length / booksPerPage + 1);
+    }
 }
 
 const addBook = (event) => {
@@ -28,24 +31,15 @@ const addBook = (event) => {
     saveBook(formData.get('title'), formData.get('price'), formData.get('image'));
     event.target.reset();
     addBookForm.classList.add('hide');
-}
-
-
-const changeRate = (id, rateChange) => {
-    const selectedBook = getBook(parseInt(id));
-    selectedBook.rate += parseInt(rateChange);
-    books = books.filter(book => book.id !== id);
-    books.push(selectedBook);
-    sort(sortType);
-    renderBooks(books);
-    updateRateDisplay(selectedBook.rate);
+    if(books.length % booksPerPage === 1) {
+        addPageInPagingLine(Math.ceil(books.length / booksPerPage));
+    }
 }
 
 const updateBook = (event, id) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const selectedBook = getBook(id);
-    debugger
     if (selectedBook) {
         selectedBook.title = formData.get('title');
         selectedBook.price = formData.get('price');
@@ -59,24 +53,22 @@ const updateBook = (event, id) => {
     updateBookForm.innerHTML = '';
 }
 
+const changeRate = (id, rateChange) => {
+    const selectedBook = getBook(parseInt(id));
+    selectedBook.rate += parseInt(rateChange);
+    books = books.filter(book => book.id !== id);
+    books.push(selectedBook);
+    sort(sortType);
+    renderBooks(books);
+    updateRateDisplay(selectedBook.rate);
+}
+
 const loadData = () => {
     bookId = 20;
     saveToStorage('books', Gbooks);
     updateBooksArray(Gbooks);
     displayBooks();
-}
-
-const prevPage = () => {
-    currentPage--;
-    if (currentPage < 0) currentPage = 0;
-    displayBooks();
-}
-
-const nextPage = () => {
-    currentPage++;
-    if (currentPage > Math.ceil(books.length / booksPerPage) - 1)
-        currentPage = Math.ceil(books.length / booksPerPage) - 1;
-    displayBooks();
+    createPagingLine();
 }
 
 const changeLanguage = () => {
@@ -110,6 +102,7 @@ const main = async () => {
     sort('id');
     loadPage();
     pushTextLanguage();
+    createPagingLine();
 }
 
 main(); 

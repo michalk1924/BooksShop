@@ -56,6 +56,7 @@
             <div class="booksLines"></div>
             <div class="nav">
                 <button onclick="prevPage()"><i class="fa-solid fa-left-long"></i></button>
+                <div class="pagingLine"></div>
                 <button onclick="nextPage()"><i class="fa-solid fa-right-long"></i></button>
             </div>
 
@@ -68,6 +69,7 @@
 
             <div class="addBook hide">
                 <form action="add-book" onsubmit="addBook(event)">
+                    <button onclick="closeElement(addBook)">❌</button>
                     <h2 class="title"></h2>
                     <label for="title">title</label>
                     <input type="text" name="title" />

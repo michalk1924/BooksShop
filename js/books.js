@@ -1,8 +1,8 @@
 const Gbooks = [
-    { id: 1, title: "The Catcher in the Rye", price: 9, rate: 0 , image:"" },
-    { id: 2, title: "To Kill a Mockingbird", price: 12, rate: 0 },
-    { id: 3, title: "1984", price: 14, rate: 0 },
-    { id: 4, title: "Pride and Prejudice", price: 8, rate: 0 },
+    { id: 1, title: "The Catcher in the Rye", price: 9, rate: 0 , image:"../images/image1.jpg" },
+    { id: 2, title: "To Kill a Mockingbird", price: 12, rate: 0 , image:"../images/image2.jpg" },
+    { id: 3, title: "1984", price: 14, rate: 0, image:"../images/image3.jpg" },
+    { id: 4, title: "Pride and Prejudice", price: 8, rate: 0, image:"../images/image4.jpg" },
     { id: 5, title: "The Great Gatsby", price: 10, rate: 0 },
     { id: 6, title: "Moby Dick", price: 13, rate: 0 },
     { id: 7, title: "War and Peace", price: 15, rate: 0 },

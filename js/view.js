@@ -7,6 +7,7 @@ const titleDown = document.querySelector('#title-down');
 const titleUp = document.querySelector('#title-up');
 const priceUp = document.querySelector('#price-up');
 const priceDown = document.querySelector('#price-down');
+const pagingLine = document.querySelector('.pagingLine');
 
 const texts = {
     title: document.querySelector('.title'),
@@ -45,16 +46,16 @@ const getBookDivInTable = (book) => {
 const showAddBook = () => {
     addBookForm.classList.remove('hide');
     if (!showBook.classList.contains('hide')) showBook.classList.add('hide');
-    if(!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
+    if (!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
 }
 
 const showBookDetails = (id) => {
     const selectedBook = getBook(id);
-    if(!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
-    if(!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
+    if (!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
+    if (!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
     showBook.classList.remove('hide');
     showBook.innerHTML = `
-    <button onclick="closeElement(${showBook})">❌</button>
+    <button onclick="closeElement(showBook)">❌</button>
     <h2>${selectedBook.title}</h2>
     <h3>Price: ${selectedBook.price}$</h3>
     <div class="rate-control">
@@ -73,7 +74,7 @@ const showUpdateBook = (id) => {
     updateBookForm.classList.remove('hide');
     updateBookForm.innerHTML = `
     <form action="add-update-book" onsubmit="updateBook(event, ${id})">
-        <button onclick="closeElement(${updateBookForm})">❌</button>
+        <button onclick="closeElement(updateBookForm)">❌</button>
                     <h2 class="title">${languages.updateBookTitle[language]}</h2>
                     <label for="title">title</label>
                     <input type="text" name="title" value=${selectedBook.title} />
@@ -94,6 +95,7 @@ const updateRateDisplay = (rate) => {
 }
 
 const closeElement = (element) => {
+    debugger
     element.classList.add('hide');
 }
 
@@ -124,4 +126,43 @@ const pushTextLanguage = () => {
             texts[key].innerHTML = languages[key][language];
         }
     }
+}
+
+const createPagingLine = () => {
+    const totalPages = Math.ceil(books.length / booksPerPage);
+    let pagingLineStr = '';
+    for (let i = 1; i <= totalPages; i++) {
+        pagingLineStr += `<button id=pageButton${i} class="page-btn ${currentPage === i - 1 ? 'active' : ''}" onclick="changePage(${i - 1})">${i}</button>`;
+    }
+    pagingLine.innerHTML = pagingLineStr;
+}
+
+const addPageInPagingLine = (page) => {
+    const pageBtn = `<button id=pageButton${page} class="page-btn" onclick="changePage(${page - 1})">${page}</button>`;
+    pagingLine.innerHTML += pageBtn;
+}
+
+const deletePageInPagingLine = (page) => {
+    const pageBtn = document.querySelector(`#pageButton${page}`);
+    if (pageBtn) {
+        pageBtn.parentNode.removeChild(pageBtn);
+    }
+}
+
+const prevPage = () => {
+    if (currentPage -1 < 0) return;
+    changePage(currentPage -1);
+}
+
+const nextPage = () => {
+    if (currentPage > Math.ceil(books.length / booksPerPage) - 1)
+        return;
+    changePage(currentPage + 1);
+}
+
+const changePage = (pageNumber) => {
+    document.querySelector(`#pageButton${currentPage+1}`).classList.remove('active');
+    currentPage = pageNumber;
+    document.querySelector(`#pageButton${pageNumber+1}`).classList.add('active');
+    displayBooks();
 }
