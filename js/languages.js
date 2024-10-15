@@ -20,7 +20,7 @@ const languages = {
     },
     thId:{
         english: 'ID',
-        hebrew: 'מספר זהות',
+        hebrew: 'מספר מזהה',
         french: 'ID',
         spanish: 'ID',
         italian: 'ID',

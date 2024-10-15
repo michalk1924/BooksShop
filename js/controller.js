@@ -66,7 +66,9 @@ const changeRate = (id, rateChange) => {
 }
 
 const loadData = () => {
+    debugger
     bookId = 20;
+    currentPage = 0;
     saveToStorage('books', Gbooks);
     updateBooksArray(Gbooks);
     displayBooks();

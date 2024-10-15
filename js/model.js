@@ -19,7 +19,7 @@ const updateBooksArray = (booksParam) => {
     books = booksParam;
 }
 
-const saveBookById = (title, price, imageSrc) => {
+const saveBook = (title, price, imageSrc) => {
     const booksLoad = loadFromStorage('books');
     if (booksLoad) {
         books = booksLoad;
@@ -30,6 +30,6 @@ const saveBookById = (title, price, imageSrc) => {
     }
 }
 
-const getBook = (bookId) => {
+const getBookById = (bookId) => {
     return books.find(book => book.id === parseInt(bookId));
 }

@@ -51,7 +51,6 @@ const showAddBook = () => {
 
 const showBookDetails = (id) => {
     const selectedBook = getBookById(id);
-    console.log(selectedBook);
     if (!updateBookForm.classList.contains('hide')) updateBookForm.classList.add('hide');
     if (!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
     showBook.classList.remove('hide');
@@ -69,6 +68,8 @@ const showBookDetails = (id) => {
 
 const showUpdateBook = (id) => {
     const selectedBook = getBookById(id);
+    console.log(selectedBook.title);
+    
     if (!selectedBook) return;
     if (!addBookForm.classList.contains('hide')) addBookForm.classList.add('hide');
     if (!showBook.classList.contains('hide')) showBook.classList.add('hide');
@@ -78,7 +79,7 @@ const showUpdateBook = (id) => {
         <button onclick="closeElement(updateBookForm)">❌</button>
                     <h2 class="title">${languages.updateBookTitle[language]}</h2>
                     <label for="title">title</label>
-                    <input type="text" name="title" value=${selectedBook.title} />
+                    <input type="text" name="title" value="${selectedBook.title}" />
                     <label for="price">price</label>
                     <input type="number" name="price" value=${selectedBook.price} />
                     <label for="rate">Rate</label>
@@ -171,5 +172,6 @@ const changeLanguage = () => {
     const selectedLanguage = document.getElementById('languageSelect').value;
     language = selectedLanguage;
     document.getElementsByTagName('body')[0].style.direction = language === 'english'? 'ltr' : 'rtl';
+    document.getElementsByClassName('nav')[0].style.direction = 'ltr';
     pushTextLanguage();
 }
