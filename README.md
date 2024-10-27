@@ -1,15 +1,14 @@
 # BooksShop
 
-Welcome to the BooksShop project! This application is designed to provide a user-friendly platform for browsing and purchasing books. Whether you're looking for the latest bestsellers or classic literature, BooksShop has you covered.
+Welcome to the BooksShop project! This application is designed to provide a user-friendly platform for browsing, adding, and purchasing books. Whether you're looking for the latest bestsellers or classic literature, BooksShop has you covered.
 
 ## Features
 
 - **Browse Books**: View a wide variety of books across different genres.
-- **Search Functionality**: Easily search for books by title, author, or genre.
-- **User Authentication**: Secure login and registration for users to manage their accounts.
-- **Shopping Cart**: Add books to your cart for a seamless checkout experience.
-- **Responsive Design**: The application is fully responsive and works well on both desktop and mobile devices.
-- **Local Storage**: Utilizes local storage to save user preferences and cart information.
+- **Add Books**: Easily add new books to the collection.
+- **Delete Books**: Remove books from the collection as needed.
+- **Pagination**: Navigate through pages of books for easier browsing.
+- **Local Storage**: Utilizes local storage to save user preferences, cart information, and book details.
 
 ## Technologies Used
 
