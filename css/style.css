@@ -52,3 +52,7 @@ main {
 .hide {
     display: none;
 }
+
+.loadData{
+    cursor : pointer;
+}
