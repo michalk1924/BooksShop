@@ -9,13 +9,12 @@ Welcome to the BooksShop project! This application is designed to provide a user
 - **User Authentication**: Secure login and registration for users to manage their accounts.
 - **Shopping Cart**: Add books to your cart for a seamless checkout experience.
 - **Responsive Design**: The application is fully responsive and works well on both desktop and mobile devices.
+- **Local Storage**: Utilizes local storage to save user preferences and cart information.
 
 ## Technologies Used
 
-- **Frontend**: React, CSS, HTML
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB
-- **Version Control**: Git
+- **Frontend**: React, CSS, HTML, JavaScript
+- **Data Storage**: Local Storage (for saving data)
 
 ## Getting Started
 
