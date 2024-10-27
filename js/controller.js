@@ -18,12 +18,12 @@ const renderBooks = () => {
 const deleteBook = (id) => {
     const bookIndex = books.findIndex(book => book.id === id);
     if (bookIndex !== -1) {
+        if((books.length - 1) % booksPerPage === 0) {
+            deletePageInPagingLine((books.length-1) / booksPerPage + 1);
+            if(currentPage >= (books.length-1) / booksPerPage - 1 && currentPage > 0) changePage(currentPage-1);
+        }
         books.splice(bookIndex, 1);
         renderBooks();
-    }
-    if(books.length % booksPerPage === 0) {
-        deletePageInPagingLine(books.length / booksPerPage + 1);
-        if(currentPage >= books.length / booksPerPage - 1) changePage(currentPage-1);
     }
 }
 

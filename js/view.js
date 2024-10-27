@@ -21,6 +21,7 @@ const texts = {
 }
 
 const displayBooks = () => {
+    debugger
     let i = currentPage;
     const booksPerPage = 10;
     let displayBooks = books.slice(i * booksPerPage, i * booksPerPage + booksPerPage);
